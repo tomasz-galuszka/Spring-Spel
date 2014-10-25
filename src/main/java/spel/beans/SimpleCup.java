@@ -1,3 +1,5 @@
+package spel.beans;
+
 /**
  * Created by tomasz on 25.10.14.
  */
