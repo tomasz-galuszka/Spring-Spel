@@ -31,9 +31,6 @@ public class SimpleCup {
 
     @Override
     public String toString() {
-        return "SimpleCup{" +
-                "color='" + color + '\'' +
-                ", capacity=" + capacity +
-                '}';
+        return "SimpleCup = { " + "color = '" + color + '\'' + ", capacity = " + capacity + " ml }";
     }
 }

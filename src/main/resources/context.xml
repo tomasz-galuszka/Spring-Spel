@@ -8,4 +8,9 @@
         <constructor-arg type="int" value="#{ T(java.lang.Math).random() * 300 }" />
     </bean>
 
+    <bean id="transparentCup" class="spel.beans.SimpleCup">
+        <constructor-arg type="java.lang.String" value="transparent" />
+        <constructor-arg type="int" value="#{whiteCup.capacity}" />
+    </bean>
+
 </beans>
