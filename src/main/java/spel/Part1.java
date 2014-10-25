@@ -7,7 +7,13 @@ import spel.beans.SimpleCup;
 
 public class Part1 {
 
+    private void init() {
+        System.out.println("\n================ Part 1 ================");
+    }
+
     public void run() {
+        init();
+
         SpelExpressionParser parser = new SpelExpressionParser();
 
         // Simple message
