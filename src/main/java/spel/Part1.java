@@ -3,9 +3,11 @@ package spel;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import spel.beans.SimpleCoffe;
+import org.springframework.util.StringUtils;
 import spel.beans.SimpleCup;
+import spel.part1.Utils1;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +17,7 @@ public class Part1 {
         System.out.println("\n================ Part 1 ================");
     }
 
-    public void run() {
+    public void run() throws NoSuchMethodException {
         init();
 
         SpelExpressionParser parser = new SpelExpressionParser();
@@ -69,7 +71,36 @@ public class Part1 {
         System.out.println(((int[])parser.parseExpression("new int[] {1,2,3,4}").getValue()).length);
 
         // method invocations
+        System.out.println(parser.parseExpression("new String('Example').contains('le')").getValue());
 
+        // assigments
+        SimpleCup cup2 = new SimpleCup("Green");
+        StandardEvaluationContext context2 = new StandardEvaluationContext(cup2);
+
+        parser.parseExpression("color").setValue(context2, "yellow");
+        System.out.println(cup2);
+
+        parser.parseExpression("color = 'brown'").getValue(context2);
+        System.out.println(cup2);
+
+        // types ,but java.lang do not need to be fully qualified other types must be
+        System.out.println(parser.parseExpression("T(String)").getValue(Class.class));
+        System.out.println(parser.parseExpression("T(java.util.Date)").getValue(Class.class));
+        System.out.println(parser.parseExpression("T(java.util.Date).from(T(java.time.Instant).EPOCH)").getValue());
+
+        // constructors  requires package name
+
+        // variables #syntax
+        SimpleCup cup3 = new SimpleCup("Red");
+        StandardEvaluationContext context3 = new StandardEvaluationContext(cup3);
+        context3.setVariable("newColor", "Grey");
+        parser.parseExpression("color = #newColor").getValue(context3);
+        System.out.println(cup3.getColor());
+
+        // functions
+        StandardEvaluationContext context4 = new StandardEvaluationContext();
+        context4.registerFunction("reverseString", Utils1.class.getDeclaredMethod("reverseString", new Class[] {String.class}));
+        System.out.println(parser.parseExpression("#reverseString('Tomasz')").getValue(context4));
 
     }
 }

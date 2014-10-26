@@ -8,7 +8,7 @@ import spel.Part4;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
 
         new Part1().run();
 //        new Part2().run();

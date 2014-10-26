@@ -21,6 +21,10 @@ public class SimpleCup {
         return color;
     }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public int getCapacity() {
         return capacity;
     }
